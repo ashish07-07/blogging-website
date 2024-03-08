@@ -2,6 +2,8 @@ import { Hono } from "hono";
 import { PrismaClient } from "@prisma/client/edge";
 import { withAccelerate } from "@prisma/extension-accelerate";
 import { decode, sign, verify } from "hono/jwt";
+import { CreateBlogInput, createBlogInput } from "mediumhelpertools";
+import { updateBlogInput } from "mediumhelpertools";
 
 export const blogRouter = new Hono<{
   Bindings: {
@@ -40,6 +42,15 @@ blogRouter.post("/", async function (c) {
 
   const body = await c.req.json();
 
+  const { success } = createBlogInput.safeParse(body);
+
+  if (!success) {
+    c.status(401);
+    return c.json({
+      msg: "invalid contents for the zod",
+    });
+  }
+
   const aid = c.get("authorid");
 
   try {
@@ -69,7 +80,13 @@ blogRouter.put("/", async function (c) {
   }).$extends(withAccelerate());
 
   const body = await c.req.json();
-
+  const { success } = updateBlogInput.safeParse(body);
+  if (!success) {
+    c.status(401);
+    return c.json({
+      msg: "invalid contents for the zod",
+    });
+  }
   try {
     const res = await prisma.post.update({
       where: {
