@@ -6,13 +6,13 @@ export function Quote() {
           "The customer support I recieved ws exceptional. THe support team went
           above and below to adress my concerns"
         </div>
-        <div className=" max-w-md text-center  text-xl font-semibold">
-          Julies Winfield
-        </div>
+      </div>
+      <div className=" max-w-md text-center  text-xl font-semibold">
+        Julies Winfield
+      </div>
 
-        <div className=" max-w-md text-center  text-sm font-semibold text-slate-400">
-          CEO | Acme corp
-        </div>
+      <div className=" max-w-md text-center  text-sm font-semibold text-slate-400">
+        CEO | Acme corp
       </div>
     </div>
   );
