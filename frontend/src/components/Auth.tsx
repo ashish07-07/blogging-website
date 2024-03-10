@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import React, { ChangeEvent, useState } from "react"; // Added import for useState
 import { Signupinput } from "mediumhelpertools";
+import { BACKEND_URL } from "../config";
+import axios from "axios";
 
 export function Auth({ type }: { type: "signup" | "signin" }) {
   const [postInput, setpostvalue] = useState<Signupinput>({
@@ -9,7 +11,24 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
     password: "",
   });
 
-  function Sendrequest() {}
+  const navigate = useNavigate();
+  async function Sendrequest() {
+    try {
+      const response = await axios.post(
+        `${BACKEND_URL}/api/v1/user/${type === "signup" ? "signup" : "signin"}`,
+        postInput
+      );
+
+      const JWT = response.data;
+      localStorage.setItem("token", JWT);
+
+      navigate("token", JWT);
+
+      console.log(JWT);
+    } catch (e) {
+      console.log(e);
+    }
+  }
   return (
     <div className="h-screen flex justify-center flex-col bg-white">
       <div className="flex justify-center">
@@ -38,8 +57,7 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
                 label="Name"
                 placeholder="Ashish BK"
                 onChange={function (e) {
-                  setpostvalue(...postInput);
-                  name: e.target.value;
+                  setpostvalue({ ...postInput, name: e.target.value });
                 }}
               ></LabelledInput>
             ) : null}
@@ -48,8 +66,7 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
               label="email"
               placeholder="bkashishh07@gmail.com"
               onChange={function (e) {
-                setpostvalue(...postInput);
-                email: e.target.value;
+                setpostvalue({ ...postInput, email: e.target.value });
               }}
             ></LabelledInput>
 
@@ -58,12 +75,12 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
               type={"password"}
               placeholder="password@123"
               onChange={function (e) {
-                setpostvalue(...postInput);
-                password: e.target.value;
+                setpostvalue({ ...postInput, password: e.target.value });
               }}
             ></LabelledInput>
 
             <button
+              onClick={Sendrequest}
               type="button"
               className=" w-full text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700 pt-4 "
             >
