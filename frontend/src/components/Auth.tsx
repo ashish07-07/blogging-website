@@ -8,6 +8,8 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
     email: "",
     password: "",
   });
+
+  function Sendrequest() {}
   return (
     <div className="h-screen flex justify-center flex-col bg-white">
       <div className="flex justify-center">
@@ -31,14 +33,16 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
           </div>
 
           <div className={"pt-4"}>
-            <LabelledInput
-              label="Name"
-              placeholder="Ashish BK"
-              onChange={function (e) {
-                setpostvalue(...postInput);
-                name: e.target.value;
-              }}
-            ></LabelledInput>
+            {type === "signup" ? (
+              <LabelledInput
+                label="Name"
+                placeholder="Ashish BK"
+                onChange={function (e) {
+                  setpostvalue(...postInput);
+                  name: e.target.value;
+                }}
+              ></LabelledInput>
+            ) : null}
 
             <LabelledInput
               label="email"
