@@ -8,7 +8,7 @@ export function Quote() {
             went above and below to adress my concerns"
           </div>
 
-          <div className=" max-w-md text-center  text-xl font-semibold">
+          <div className=" max-w-md text-center  text-xl font-semibold mt-4">
             Julies Winfield
           </div>
 
