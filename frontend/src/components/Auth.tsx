@@ -22,9 +22,9 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
       const JWT = response.data;
       localStorage.setItem("token", JWT);
 
-      navigate("token", JWT);
-
       console.log(JWT);
+
+      navigate("token", JWT);
     } catch (e) {
       console.log(e);
     }
