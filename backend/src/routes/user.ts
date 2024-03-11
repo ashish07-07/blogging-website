@@ -41,7 +41,7 @@ userRouter.post("/signup", async function (c) {
   return c.json({ jwt: token });
 });
 
-userRouter.post("/api/v1/user/signin", async function (c) {
+userRouter.post("/signin", async function (c) {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
