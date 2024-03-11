@@ -24,6 +24,9 @@ blogRouter.use("/*", async function (c, next) {
     c.status(201);
 
     await next();
+
+    c.set("authorid", user.id);
+
     return c.json({
       msg: user,
     });

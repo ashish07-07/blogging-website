@@ -24,7 +24,7 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
 
       console.log(JWT);
 
-      navigate("/blog");
+      navigate("/blogs");
     } catch (e) {
       alert("Error while signup");
       console.log(e);
