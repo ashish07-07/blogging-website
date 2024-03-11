@@ -19,12 +19,12 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
         postInput
       );
 
-      const JWT = response.data;
+      const JWT = response.data.jwt;
       localStorage.setItem("token", JWT);
 
       console.log(JWT);
 
-      navigate("token", JWT);
+      navigate("/blog");
     } catch (e) {
       alert("Error while signup");
       console.log(e);
