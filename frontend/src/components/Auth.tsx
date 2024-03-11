@@ -26,6 +26,7 @@ export function Auth({ type }: { type: "signup" | "signin" }) {
 
       navigate("token", JWT);
     } catch (e) {
+      alert("Error while signup");
       console.log(e);
     }
   }
