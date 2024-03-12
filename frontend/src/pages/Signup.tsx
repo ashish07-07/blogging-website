@@ -1,7 +1,6 @@
 import { Quote } from "../components/Quote";
 
 import { Auth } from "../components/Auth";
-import { type } from "./../../../common/src/index";
 
 export function Signup() {
   return (

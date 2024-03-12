@@ -14,16 +14,14 @@ export function Blog() {
       <div className="flex justify-center   ">
         <div className=" max-w-xl ">
           {blogs.map((blog) => {
+            console.log(blog);
             return (
               <Blogcard
-                authorName={"Ashish"}
-                title={
-                  "How an ugly single page website makes $5000 a month without affiliate marketting "
-                }
-                content={
-                  "How an ugly single page website makes $5000 a month without affiliate markettingHow an ugly single page website makes $5000 a month without affiliate markettingHow an ugly single page website makes $5000 a month without affiliate markettingHow an ugly single page website makes $5000 a month without affiliate marketting"
-                }
+                authorName={blog.author.name || "Anonymos"}
+                title={blog.title}
+                content={blog.content}
                 publishedDate={"2 nd feb 2024"}
+                id={blog.id}
               ></Blogcard>
             );
           })}
