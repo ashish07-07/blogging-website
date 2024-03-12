@@ -3,7 +3,7 @@ import axios from "axios";
 import { BACKEND_URL } from "../config";
 import { Blog } from "./../pages/Blog";
 
-interface Blog {
+export interface Blog {
   content: string;
   title: string;
   id: string;

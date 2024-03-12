@@ -12,7 +12,7 @@ export function Blogs() {
 
   return (
     <div>
-      <FullBlog></FullBlog>
+      <FullBlog blog={blog}></FullBlog>
     </div>
   );
 }
