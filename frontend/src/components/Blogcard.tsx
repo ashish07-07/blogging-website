@@ -89,6 +89,7 @@ export function Blogcard({
   content,
   id,
 }: Blogcard) {
+  localStorage.setItem("id", id);
   return (
     <Link to={`/blog/${id}`}>
       <div className="p-4 border-b border-slate-200 pb-4">
