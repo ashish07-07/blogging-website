@@ -1,5 +1,6 @@
 import { Appbar } from "./Appbar";
 import { Blog } from "../hooks/index";
+import { Avatar } from "./Blogcard";
 
 export function FullBlog({ blog }: { blog: Blog }) {
   return (
@@ -13,14 +14,26 @@ export function FullBlog({ blog }: { blog: Blog }) {
         </div>
 
         <div className=" col-span-4 ">
-          Author
-          <div className="text-2xl font-bold">
-            {" "}
-            {blog.author.name || "Anonymous"}
-          </div>
-          <div className="pt-2 text-slate-500">
-            Random catch phrase about the authors ability to grab the users
-            attention
+          <div className="text-slate-600 text-lg">Author</div>
+
+          <div className="flex w-full">
+            <div className="pr-4 flex flex-col justify-center">
+              <Avatar
+                size="big"
+                name={blog.author.name || "Annonymous"}
+              ></Avatar>
+            </div>
+
+            <div>
+              <div className="text-xl font-bold">
+                {blog.author.name || "Anonymous"}
+              </div>
+
+              <div className="pt-2 text-slate-500">
+                Random catch phrase about the authors ability to grab the users
+                attention
+              </div>
+            </div>
           </div>
         </div>
       </div>
