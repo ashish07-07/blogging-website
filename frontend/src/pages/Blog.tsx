@@ -14,7 +14,7 @@ export function Blog() {
       <div className="flex justify-center   ">
         <div className=" max-w-xl ">
           {blogs.map((blog) => {
-            console.log(blog);
+            console.log(blog.id);
             return (
               <Blogcard
                 authorName={blog.author.name || "Anonymos"}
