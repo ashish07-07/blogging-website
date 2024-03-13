@@ -23,9 +23,8 @@ blogRouter.use("/*", async function (c, next) {
   if (user) {
     c.status(201);
 
-    await next();
-
     c.set("authorid", user.id);
+    await next();
 
     return c.json({
       msg: user,
@@ -55,6 +54,7 @@ blogRouter.post("/", async function (c) {
   }
 
   const aid = c.get("authorid");
+  console.log(aid);
 
   try {
     const res = await prisma.post.create({
@@ -63,17 +63,18 @@ blogRouter.post("/", async function (c) {
         content: body.content,
         authorid: aid,
       },
+      select: {
+        id: true,
+        title: true,
+      },
     });
 
     c.status(201);
-    c.json({
-      msg: " blog posted sucessfully",
-      res,
-    });
+    c.json({ res });
   } catch (e) {
-    c.json({
-      msg: e,
-    });
+    console.log(e);
+    c.status(401);
+    c.json({ msg: "error putting the posts " });
   }
 });
 

@@ -13,9 +13,29 @@ export interface Blog {
   };
 }
 
+// export const useBlogs = () => {
+//   const [loading, setloading] = useState(true);
+//   const [blogs, setblogs] = useState<Blog[]>([]);
+
+//   useEffect(() => {
+//     axios
+//       .get(`${BACKEND_URL}/api/v1/blog/bulk`, {
+//         headers: {
+//           authorization: localStorage.getItem("token"),
+//         },
+//       })
+//       .then(function (res) {
+//         setblogs(res.data.allblogg);
+//         setloading(false);
+//       });
+//   }, []);
+
+//   return { loading, blogs };
+// };
+
 export const useBlogs = () => {
-  const [loading, setloading] = useState(true);
-  const [blogs, setblogs] = useState<Blog[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [blogs, setBlogs] = useState<Blog[]>([]);
 
   useEffect(() => {
     axios
@@ -25,8 +45,12 @@ export const useBlogs = () => {
         },
       })
       .then(function (res) {
-        setblogs(res.data.allblogg);
-        setloading(false);
+        setBlogs(res.data.allblogg);
+        setLoading(false);
+      })
+      .catch(function (error) {
+        console.error("Error fetching blogs:", error);
+        setLoading(false); // Set loading to false even in case of an error
       });
   }, []);
 
@@ -35,7 +59,8 @@ export const useBlogs = () => {
 
 export const useBlog = ({ id }: { id: string }) => {
   const [loading, setloading] = useState(true);
-  const [blog, setblog] = useState([]);
+
+  const [blog, setblog] = useState<Blog[]>([]);
 
   useEffect(() => {
     axios

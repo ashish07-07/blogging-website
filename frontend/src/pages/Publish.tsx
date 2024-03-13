@@ -2,17 +2,28 @@ import { useState } from "react";
 import { Appbar } from "../components/Appbar";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { useNavigate } from "react-router-dom";
 
 export function Publish() {
   const [title, settitle] = useState("");
   const [content, setcontent] = useState("");
 
+  const navigate = useNavigate();
   async function a() {
-    const res = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
-      title,
-      content,
-    });
+    const res = await axios.post(
+      `${BACKEND_URL}/api/v1/blog`,
+      {
+        title,
+        content,
+      },
+      {
+        headers: {
+          authorization: localStorage.getItem("token"),
+        },
+      }
+    );
     console.log(res);
+    navigate(`/blog/${res.data.msg.id}`);
   }
   return (
     <div>
@@ -50,30 +61,55 @@ export function Publish() {
   );
 }
 
+// function TextBox({
+//   onChange,
+// }: {
+//   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+// }) {
+//   return (
+//     <form>
+//       <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 ">
+//         <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
+//           <div className="px-4 py-2 bg-white rounded-b-lg w-full">
+//             <label htmlFor="editor" className="sr-only">
+//               Publish post
+//             </label>
+//             <textarea
+//               onChange={onChange}
+//               id="editor"
+//               rows={5} // Adjust the number of rows for a smaller height
+//               className=" focus-outline-none block w-full px-0 py-1 text-sm text-black-800 bg-transparent border-0 dark:text-black dark:placeholder-gray-400"
+//               placeholder="Write an article..."
+//               required
+//             />
+//           </div>
+//         </div>
+//       </div>
+//     </form>
+//   );
+// }
 function TextBox({
   onChange,
 }: {
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }) {
   return (
-    <form>
-      <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 ">
-        <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
-          <div className="px-4 py-2 bg-white rounded-b-lg w-full">
-            <label htmlFor="editor" className="sr-only">
-              Publish post
-            </label>
-            <textarea
-              onChange={onChange}
-              id="editor"
-              rows={5} // Adjust the number of rows for a smaller height
-              className=" focus-outline-none block w-full px-0 py-1 text-sm text-black-800 bg-transparent border-0 dark:text-black dark:placeholder-gray-400"
-              placeholder="Write an article..."
-              required
-            />
-          </div>
+    <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 ">
+      <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
+        <div className="px-4 py-2 bg-white rounded-b-lg w-full">
+          <label htmlFor="editor" className="sr-only">
+            Publish post
+          </label>
+          <textarea
+            onChange={onChange} // Attach onChange directly to the textarea
+            id="editor"
+            rows={5}
+            className="block w-full px-0 py-1 text-sm text-gray-800 bg-transparent border-0 dark:text-black dark:placeholder-gray-400"
+            placeholder="Write an article..."
+            required
+          />
         </div>
       </div>
-    </form>
+    </div>
   );
 }
