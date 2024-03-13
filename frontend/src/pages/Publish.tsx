@@ -1,6 +1,19 @@
+import { useState } from "react";
 import { Appbar } from "../components/Appbar";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 export function Publish() {
+  const [title, settitle] = useState("");
+  const [content, setcontent] = useState("");
+
+  async function a() {
+    const res = await axios.post(`${BACKEND_URL}/api/v1/blog`, {
+      title,
+      content,
+    });
+    console.log(res);
+  }
   return (
     <div>
       <Appbar></Appbar>
@@ -13,16 +26,35 @@ export function Publish() {
             type="text"
             className="w-full bg-grey-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
             placeholder="Title"
+            onChange={function (e) {
+              settitle(e.target.value);
+            }}
           ></input>
 
-          <TextBox></TextBox>
+          <TextBox
+            onChange={function (e) {
+              setcontent(e.target.value);
+            }}
+          ></TextBox>
+
+          <button
+            onClick={a}
+            type="submit"
+            className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 pt-3 ml-2"
+          >
+            Publish post
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-function TextBox() {
+function TextBox({
+  onChange,
+}: {
+  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+}) {
   return (
     <form>
       <div className="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 ">
@@ -32,6 +64,7 @@ function TextBox() {
               Publish post
             </label>
             <textarea
+              onChange={onChange}
               id="editor"
               rows={5} // Adjust the number of rows for a smaller height
               className=" focus-outline-none block w-full px-0 py-1 text-sm text-black-800 bg-transparent border-0 dark:text-black dark:placeholder-gray-400"
@@ -41,13 +74,6 @@ function TextBox() {
           </div>
         </div>
       </div>
-
-      <button
-        type="submit"
-        className="inline-flex items-center px-5 py-2.5 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800 pt-3 ml-2"
-      >
-        Publish post
-      </button>
     </form>
   );
 }
