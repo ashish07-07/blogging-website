@@ -10,7 +10,14 @@ export function Blog() {
   if (loading) {
     return (
       <div>
-        <BlogSkeleton></BlogSkeleton>
+        <Appbar></Appbar>
+        <div className="flex justify-center">
+          <div>
+            <BlogSkeleton></BlogSkeleton>
+            <BlogSkeleton></BlogSkeleton>
+            <BlogSkeleton></BlogSkeleton>
+          </div>
+        </div>
       </div>
     );
   }
