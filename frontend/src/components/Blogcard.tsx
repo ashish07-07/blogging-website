@@ -94,7 +94,7 @@ export function Blogcard({
     <Link to={`/blog/${id}`}>
       <div className="p-4 border-b border-slate-200 pb-4">
         <div className="flex items-center">
-          <Avatar name={authorName}></Avatar>
+          <Avatar name={authorName} size={"small"}></Avatar>
           <div className="font-extralight pl-2 text-sm flex justify-center flex-col">
             {authorName}
           </div>

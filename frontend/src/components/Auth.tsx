@@ -1,5 +1,5 @@
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import React, { ChangeEvent, useState } from "react"; // Added import for useState
+import { Link, useNavigate } from "react-router-dom";
+import { ChangeEvent, useState } from "react"; // Added import for useState
 import { Signupinput } from "mediumhelpertools";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
